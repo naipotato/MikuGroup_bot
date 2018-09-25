@@ -7,7 +7,7 @@ from telegram.ext import Updater, Filters, CommandHandler, MessageHandler
 
 from animuxbot.ban import ban, kick, kick_me, unban
 from animuxbot.deletemessages import delete
-from animuxbot.general import pin, pin_mute, love
+from animuxbot.general import pin, pin_mute, love, help_message
 from animuxbot.newmembers import new_chat_members
 from animuxbot.secrets import DEBUG_TOKEN, RELEASE_TOKEN, DEBUG_GROUP_ID, RELEASE_GROUP_ID
 
@@ -55,6 +55,7 @@ def main():
     dp.add_handler(CommandHandler("pinmute", pin_mute, Filters.group))
     dp.add_handler(CommandHandler("unban", unban, Filters.group))
     dp.add_handler(CommandHandler("love", love, Filters.group))
+    dp.add_handler(CommandHandler("help", help_message, Filters.group))
 
     # Añadimos los handlers para mensajes
     dp.add_handler(MessageHandler(Filters.group & Filters.status_update.new_chat_members, new_chat_members))
