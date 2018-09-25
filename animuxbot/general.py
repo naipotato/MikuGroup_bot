@@ -7,7 +7,18 @@ logger = logging.getLogger()
 
 
 def about(bot, update):
-    pass
+    logger.info("Command /about received")
+
+    acerca = """<b>Hatsune Miku</b> @Animux_bot
+<i>Versión: 0.6.0</i>
+
+<i>Un excelente bot desarrollado para administrar el grupo @AnimuxOwO, además de tener muchos comandos divertidos :D</i>
+
+<b>Desarrollado por:</b> <a href="tg://user?id=82982166">ηαнυεℓ ωεx∂</a>
+<b>Código fuente:</b> https://github.com/nahuelwexd/AnimuxBot"""
+
+    bot.send_chat_action(update.message.chat.id, ChatAction.TYPING)
+    update.message.reply_text(acerca, ParseMode.HTML, True)
 
 
 def help_message(bot, update):

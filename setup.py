@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name = 'animuxbot',
-    version = '0.5.0',
+    version = '0.6.0',
     packages = ['animuxbot'],
     author = 'nahuelwexd',
     entry_points = {
