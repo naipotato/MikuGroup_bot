@@ -1,13 +1,13 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-*$py.class
 
 # C extensions
 *.so
 
 # Distribution / packaging
 .Python
+env/
 build/
 develop-eggs/
 dist/
@@ -19,11 +19,10 @@ lib64/
 parts/
 sdist/
 var/
-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-MANIFEST
+.env
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -41,11 +40,11 @@ htmlcov/
 .coverage
 .coverage.*
 .cache
+.pytest_cache
 nosetests.xml
 coverage.xml
-*.cover
-.hypothesis/
-.pytest_cache/
+*,cover
+.coveralls.yml
 
 # Translations
 *.mo
@@ -53,54 +52,19 @@ coverage.xml
 
 # Django stuff:
 *.log
-local_settings.py
-db.sqlite3
-
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
 
 # Sphinx documentation
 docs/_build/
 
 # PyBuilder
 target/
+.idea/
 
-# Jupyter Notebook
-.ipynb_checkpoints
+# Sublime Text 2
+*.sublime*
 
-# pyenv
-.python-version
+# original files from merges
+*.orig
 
-# celery beat schedule file
-celerybeat-schedule
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-
-secrets.py
+# Exclude .exrc file for vim
+.exrc
