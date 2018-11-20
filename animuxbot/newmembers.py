@@ -21,7 +21,8 @@
 import os
 from telegram import ChatAction, ParseMode
 
-group_id = os.environ['TELEGRAM_GROUP']
+group_id = eval(os.environ['TELEGRAM_GROUP'])
+print(type(group_id))
 
 
 def added_to_group(bot, update):
