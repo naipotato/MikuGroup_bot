@@ -43,6 +43,13 @@ def added_to_group(bot, update):
                      '(◕‿◕)', ParseMode.MARKDOWN)
 
 
+def filter_group(bot, update):
+    if update.message.chat.id != group_id:
+        bot.send_chat_action(update.message.chat.id, ChatAction.TYPING)
+        bot.send_message(update.message.chat.id, "Eh? Qué hago aquí? Esto no es @AnimuxOwO! (>_<)")
+        bot.leave_chat(update.message.chat.id)
+
+
 def new_chat_members(bot, update):
     if bot.get_me() in update.message.new_chat_members:
         added_to_group(bot, update)

@@ -21,7 +21,7 @@ from telegram.ext import Updater, Filters, CommandHandler, MessageHandler
 from animuxbot.ban import ban, kick, kick_me, unban
 from animuxbot.deletemessages import delete
 from animuxbot.general import pin, pin_mute, love, help_message, about
-from animuxbot.newmembers import new_chat_members, added_to_group
+from animuxbot.newmembers import new_chat_members, filter_group
 
 
 class Bot(object):
@@ -48,4 +48,4 @@ class Bot(object):
         dispatcher.add_handler(CommandHandler('about', about, Filters.group))
 
         dispatcher.add_handler(MessageHandler(Filters.group & Filters.status_update.new_chat_members, new_chat_members))
-        dispatcher.add_handler(MessageHandler(Filters.group, added_to_group))
+        dispatcher.add_handler(MessageHandler(Filters.group, filter_group))
