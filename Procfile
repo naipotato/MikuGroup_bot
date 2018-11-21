@@ -1,1 +1,1 @@
-bot: python3 animux-bot
+web: python3 animux-bot

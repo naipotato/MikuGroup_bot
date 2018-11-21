@@ -27,12 +27,14 @@ from animuxbot.newmembers import new_chat_members, filter_group
 class Bot(object):
 
     def __init__(self, token: str):
+        self.token = token
         self.updater = Updater(token)
 
         self.configure_handlers(self.updater.dispatcher)
 
-    def run(self):
-        self.updater.start_polling()
+    def run(self, port: int):
+        self.updater.start_webhook(listen='0.0.0.0', port=port, url_path=self.token)
+        self.updater.bot.set_webhook('https://animux-bot.herokuapp.com/' + self.token)
         self.updater.idle()
     
     def configure_handlers(self, dispatcher):

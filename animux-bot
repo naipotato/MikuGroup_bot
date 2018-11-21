@@ -20,10 +20,11 @@
 
 import os
 
-token = os.environ['TELEGRAM_TOKEN']
+token = os.environ.get('TELEGRAM_TOKEN')
+port = int(os.environ.get('PORT', '8443'))
 
 
 if __name__ == '__main__':
     from animuxbot import Bot
     bot = Bot(token)
-    bot.run()
+    bot.run(port)
