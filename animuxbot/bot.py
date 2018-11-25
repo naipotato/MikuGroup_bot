@@ -20,7 +20,7 @@ from telegram.ext import Updater, Filters, CommandHandler, MessageHandler
 
 from animuxbot.ban import ban, kick, kick_me, unban
 from animuxbot.deletemessages import delete
-from animuxbot.general import pin, pin_mute, love, help_message, about
+from animuxbot.general import pin, pin_mute, love, help_message, about, admin_list
 from animuxbot.newmembers import new_chat_members, filter_group
 
 
@@ -38,6 +38,7 @@ class Bot(object):
         self.updater.idle()
     
     def configure_handlers(self, dispatcher):
+        dispatcher.add_handler(CommandHandler('adminlist', admin_list, Filters.group))
         dispatcher.add_handler(CommandHandler('ban', ban, Filters.group))
         dispatcher.add_handler(CommandHandler('del', delete, Filters.group))
         dispatcher.add_handler(CommandHandler('kick', kick, Filters.group))

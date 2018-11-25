@@ -1,5 +1,2 @@
-# IDE folders
 .vscode/
-
-# Virtual environments
 env/
