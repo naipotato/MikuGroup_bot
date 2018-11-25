@@ -119,7 +119,7 @@ def pin_mute(bot, update):
 
 
 def admin_list(bot, update):
-    admin_list = bot.get_chat_administrators(update.effective_chat.id)
+    admin_list = bot.get_chat_administrators(update.message.chat.id)
 
     response = 'Lista de administradores:\n'
 
@@ -132,4 +132,4 @@ def admin_list(bot, update):
             response += '\n - [%s %s](tg://user?id=%s)' % (
                 user.first_name, user.last_name, user.id)
 
-    update.effective_message.reply_markdown(response)
+    update.message.reply_text(response, ParseMode.MARKDOWN)
