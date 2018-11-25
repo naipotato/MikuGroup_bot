@@ -52,11 +52,11 @@ def help_message(bot, update):
 def love(bot, update):
     if update.message.from_user.id == 82982166 or update.message.from_user.id == 359710858:
         bot.send_chat_action(update.message.chat.id, ChatAction.TYPING)
-        update.message.reply_text('La pareja más hermosa que he conocido son [Zoé]\
-                                  (tg://user?id=359710858) y [Nahuel](tg://user?id=82982166) \
-                                  :3\n\nEsos dos tortolitos enamorados se aman \
-                                  incondicionalmente, se acompañan en todo lo que pueden, \
-                                  y anteponen siempre las necesidades del otro ❤️',
+        update.message.reply_text('La pareja más hermosa que he conocido son [Zoé]' +
+                                  '(tg://user?id=359710858) y [Nahuel](tg://user?id=82982166) ' +
+                                  ':3\n\nEsos dos tortolitos enamorados se aman ' +
+                                  'incondicionalmente, se acompañan en todo lo que pueden, ' +
+                                  'y anteponen siempre las necesidades del otro ❤️',
                                   ParseMode.MARKDOWN)
         bot.send_sticker(update.message.chat.id,
                          'CAADAQADwQEAAuWyyh3shINoW9G1fwI')
