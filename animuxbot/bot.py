@@ -20,7 +20,7 @@ from telegram.ext import Updater, Filters, CommandHandler, MessageHandler
 
 from animuxbot.ban import ban, kick, kick_me, unban
 from animuxbot.deletemessages import delete
-from animuxbot.general import pin, pin_mute, love, help_message, about, admin_list
+from animuxbot.general import pin, pin_mute, love, help_message, about
 from animuxbot.newmembers import new_chat_members, filter_group
 
 
