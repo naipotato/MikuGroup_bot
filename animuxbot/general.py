@@ -132,4 +132,5 @@ def admin_list(bot, update):
             response += '\n - [{} {}](tg://user?id={})'.format(
                 user.first_name, user.last_name, user.id)
 
+    bot.send_chat_action(update.message.chat.id, ChatAction.TYPING)
     update.message.reply_text(response, ParseMode.MARKDOWN)
