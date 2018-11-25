@@ -118,21 +118,3 @@ def pin_mute(bot, update):
 
     bot.send_chat_action(update.message.chat.id, ChatAction.TYPING)
     update.message.reply_to_message.reply_text('Anclado <(￣︶￣)>')
-
-
-def admin_list(bot, update):
-    admin_list = bot.get_chat_administrators(update.message.chat.id)
-
-    response = 'Lista de administradores:\n'
-
-    for admin in admin_list:
-        user = admin.user
-
-        if user.username is None:
-            response += '\n - [{} {}](tg://user?id={})'.format(
-                user.first_name, user.last_name, user.id)
-        else:
-            response += '\n - @{}'.format(user.username)
-
-    bot.send_chat_action(update.message.chat.id, ChatAction.TYPING)
-    update.message.reply_text(response, ParseMode.MARKDOWN)

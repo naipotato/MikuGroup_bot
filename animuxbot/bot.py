@@ -38,7 +38,6 @@ class Bot(object):
         self.updater.idle()
     
     def configure_handlers(self, dispatcher):
-        dispatcher.add_handler(CommandHandler('adminlist', admin_list, Filters.group))
         dispatcher.add_handler(CommandHandler('ban', ban, Filters.group))
         dispatcher.add_handler(CommandHandler('del', delete, Filters.group))
         dispatcher.add_handler(CommandHandler('kick', kick, Filters.group))
