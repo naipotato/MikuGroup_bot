@@ -127,9 +127,9 @@ def admin_list(bot, update):
         user = admin.user
 
         if user.username:
-            response += '\n - @%s' % user.username
+            response += '\n - @{}'.format(user.username)
         else:
-            response += '\n - [%s %s](tg://user?id=%s)' % (
+            response += '\n - [{} {}](tg://user?id={})'.format(
                 user.first_name, user.last_name, user.id)
 
     update.message.reply_text(response, ParseMode.MARKDOWN)
