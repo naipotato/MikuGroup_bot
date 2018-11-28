@@ -1,4 +1,4 @@
 ponyrevolution-bot
 ==================
 
-A Telegram bot to manage the [@AnimuxOwO](https://t.me/AnimuxOwO) group.
+A Telegram bot to manage the [@PonyRevolution](https://t.me/PonyRevolution)'s groups.
