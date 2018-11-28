@@ -1,4 +1,4 @@
-from ponyrevolution_bot import LOGGER, PORT, TOKEN, URL, WEBHOOK, updater
+from pony_bot import LOGGER, PORT, TOKEN, URL, WEBHOOK, updater
 
 
 def main():

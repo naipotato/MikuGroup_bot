@@ -1,1 +1,1 @@
-web: python3 -m ponyrevolution_bot
+web: python3 -m pony_bot

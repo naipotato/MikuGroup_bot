@@ -8,6 +8,7 @@ def bot_can_restrict(func):
     @wraps(func)
     def restrict_rights(bot: Bot, update: Update, *args, **kwargs):
         chat_member = update.effective_chat.get_member(bot.id)
+        
         if chat_member.can_restrict_members:
             return func(bot, update, *args, **kwargs)
         else:
@@ -23,6 +24,7 @@ def user_can_restrict(func):
     def restrict_rights(bot: Bot, update: Update, *args, **kwargs):
         chat_member = update.effective_chat.get_member(
             update.effective_user.id)
+        
         if chat_member.can_restrict_members or chat_member.status == ChatMember.CREATOR:
             return func(bot, update, *args, **kwargs)
         else:

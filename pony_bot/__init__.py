@@ -30,9 +30,9 @@ if ENV:
     PORT = int(os.environ.get('PORT', 8443))
 else:
     if ARGS.debug:
-        from ponyrevolution_bot.config import Debug as Config
+        from pony_bot.config import Debug as Config
     else:
-        from ponyrevolution_bot.config import Release as Config
+        from pony_bot.config import Release as Config
     
     TOKEN = Config.TOKEN
     WEBHOOK = Config.WEBHOOK
