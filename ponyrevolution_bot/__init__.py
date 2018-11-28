@@ -1,1 +1,0 @@
-from animuxbot.bot import Bot
