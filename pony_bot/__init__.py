@@ -33,7 +33,7 @@ else:
         from pony_bot.config import Debug as Config
     else:
         from pony_bot.config import Release as Config
-    
+
     TOKEN = Config.TOKEN
     WEBHOOK = Config.WEBHOOK
     URL = Config.URL

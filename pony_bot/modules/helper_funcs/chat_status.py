@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 from functools import wraps
 
-from telegram import Bot, ChatAction, ChatMember, Update
+from telegram import Bot, Chat, ChatAction, ChatMember, Update
 
 
 def bot_can_restrict(func):
     @wraps(func)
     def restrict_rights(bot: Bot, update: Update, *args, **kwargs):
         chat_member = update.effective_chat.get_member(bot.id)
-        
+
         if chat_member.can_restrict_members:
             return func(bot, update, *args, **kwargs)
         else:
@@ -24,7 +24,7 @@ def user_can_restrict(func):
     def restrict_rights(bot: Bot, update: Update, *args, **kwargs):
         chat_member = update.effective_chat.get_member(
             update.effective_user.id)
-        
+
         if chat_member.can_restrict_members or chat_member.status == ChatMember.CREATOR:
             return func(bot, update, *args, **kwargs)
         else:
@@ -33,3 +33,13 @@ def user_can_restrict(func):
                 'Lo siento, pero me dijeron que tú no puedes banear usuarios...')
 
     return restrict_rights
+
+
+def is_user_ban_protected(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
+    if chat.type == Chat.PRIVATE or chat.all_members_are_administrators:
+        return True
+
+    if not member:
+        member = chat.get_member(user_id)
+
+    return member.status in (ChatMember.ADMINISTRATOR, ChatMember.CREATOR)
