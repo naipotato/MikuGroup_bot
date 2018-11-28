@@ -15,7 +15,6 @@ from pony_bot.modules.helper_funcs.extraction import extract_user_and_text
 @user_can_restrict
 def ban(bot: Bot, update: Update, args: List[str]):
     chat = update.effective_chat
-    user = update.effective_user
     message = update.effective_message
 
     user_id, reason = extract_user_and_text(message, args)
