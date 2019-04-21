@@ -1,4 +1,4 @@
 .vscode/
-env/
-pony_bot/config.py
+.env/
+config.py
 __pycache__/

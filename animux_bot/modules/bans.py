@@ -1,13 +1,30 @@
+# Copyright (C) 2019 Nahuel Gomez Castro <nahual_gomca@outlook.com.ar>
+#
+# This file is part of Animux bot.
+#
+# Animux bot is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Animux bot is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 from typing import List
 
-from telegram import Bot, ChatAction, Update, ParseMode
+from telegram import Bot, ChatAction, ParseMode, Update
 from telegram.ext import CommandHandler, Filters, run_async
 
-from pony_bot import LOGGER, dispatcher
-from pony_bot.modules.helper_funcs.chat_status import (bot_can_restrict,
-                                                       is_user_ban_protected,
-                                                       user_can_restrict)
-from pony_bot.modules.helper_funcs.extraction import extract_user_and_text
+from animux_bot import DISPATCHER, LOGGER
+from .helper_funcs.chat_status import (bot_can_restrict,
+                                       is_user_ban_protected,
+                                       user_can_restrict)
+from .helper_funcs.extraction import extract_user_and_text
 
 
 @run_async
@@ -54,4 +71,4 @@ __mod_name__ = 'Bans'
 # Load commands
 BAN_COMMAND_HANDLER = CommandHandler('ban', ban, Filters.group, pass_args=True)
 
-dispatcher.add_handler(BAN_COMMAND_HANDLER)
+DISPATCHER.add_handler(BAN_COMMAND_HANDLER)
