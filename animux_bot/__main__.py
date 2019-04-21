@@ -15,7 +15,18 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import importlib
+
 from . import LOGGER, PORT, TOKEN, UPDATER, URL, WEBHOOK
+from .modules import ALL_MODULES
+
+# Imported modules
+IMPORTED = {}
+
+for module_name in ALL_MODULES:
+    imported_module = importlib.import_module(
+        'animux_bot.modules.' + module_name)
+    IMPORTED[imported_module.__mod_name__.lower()] = imported_module
 
 
 def main():
@@ -30,4 +41,5 @@ def main():
 
 
 if __name__ == '__main__':
+    LOGGER.info('Successfully loaded modules: %s' % str(ALL_MODULES))
     main()
