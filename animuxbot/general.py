@@ -22,8 +22,8 @@ from telegram import ChatAction, ChatMember, ParseMode
 
 
 def about(bot, update):
-    acerca = '''<b>Hatsune Miku</b> @Animux_bot
-<i>Versión: 0.6.0</i>
+    acerca = '''<b>Hatsune Miku</b> @PonyRevolution_bot
+<i>Versión: 0.7.0</i>
 
 <i>Un excelente bot desarrollado para administrar el grupo @AnimuxOwO, además de tener muchos comandos divertidos :D</i>
 
