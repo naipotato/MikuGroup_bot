@@ -28,7 +28,7 @@ def about(bot, update):
 <i>Un excelente bot desarrollado para administrar el grupo @AnimuxOwO, además de tener muchos comandos divertidos :D</i>
 
 <b>Desarrollado por:</b> <a href="tg://user?id=82982166">ηαнυεℓ ωεx∂</a>
-<b>Código fuente:</b> https://github.com/nahuelwexd/AnimuxBot'''
+<b>Código fuente:</b> https://gitlab.com/nahuelwexd/groupadmin-bot'''
 
     bot.send_chat_action(update.message.chat.id, ChatAction.TYPING)
     update.message.reply_text(acerca, ParseMode.HTML, True)
