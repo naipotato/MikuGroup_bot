@@ -122,8 +122,6 @@ def pin_mute(bot, update):
 
 
 def function_di(bot, update, args):
-    print ("Función 'di' activada")
-
     if args is None:
         bot.send_chat_action(update.message.chat.id, ChatAction.TYPING)
         update.message.reply_text('Emm... Qué es lo que debo decir? (・・ ) ?')
