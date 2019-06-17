@@ -118,3 +118,14 @@ def pin_mute(bot, update):
 
     bot.send_chat_action(update.message.chat.id, ChatAction.TYPING)
     update.message.reply_to_message.reply_text('Anclado <(￣︶￣)>')
+
+
+def di(bot, update, args):
+    if args is None:
+        bot.send_chat_action(update.message.chat.id, ChatAction.TYPING)
+        update.message.reply_text('Emm... Qué es lo que debo decir? (・・ ) ?')
+        return
+    
+    bot.send_chat_action(update.message.chat.id, ChatAction.TYPING)
+    update.message.reply_text(' '.join(args))
+
