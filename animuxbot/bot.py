@@ -48,7 +48,7 @@ class Bot(object):
         dispatcher.add_handler(CommandHandler('love', love, Filters.group))
         dispatcher.add_handler(CommandHandler('help', help_message, Filters.group))
         dispatcher.add_handler(CommandHandler('about', about, Filters.group))
-        dispatcher.add_handler(CommandHandler('di', di, Filters.group))
+        dispatcher.add_handler(CommandHandler('di', function_di, Filters.group))
 
         dispatcher.add_handler(MessageHandler(Filters.group & Filters.status_update.new_chat_members, new_chat_members))
         dispatcher.add_handler(MessageHandler(Filters.group, filter_group))
