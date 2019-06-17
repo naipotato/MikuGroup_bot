@@ -43,7 +43,8 @@ def help_message(bot, update):
 - `/kickme`: te expulsaré del grupo, pero podrás volver a entrar.
 - `/pin` (por respuesta): anclaré el mensaje notificando a todos.
 - `/pinmute` (por respuesta): anclaré el mensaje silencionsamente.
-- `/unban` (por respuesta): le quitaré el ban al usuario al que respondiste, incluso si el mensaje es reenviado.'''
+- `/unban` (por respuesta): le quitaré el ban al usuario al que respondiste, incluso si el mensaje es reenviado.
+- `/di`: repetiré lo que has dicho.'''
 
     bot.send_chat_action(update.message.chat.id, ChatAction.TYPING)
     update.message.reply_text(ayuda, ParseMode.MARKDOWN)
