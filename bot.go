@@ -75,6 +75,9 @@ func (bot *bot) listenToCommands() {
 			case "pin":
 				pin(bot.botAPI, update)
 				break
+			case "pinmute":
+				pinMute(bot.botAPI, update)
+				break
 			case "unban":
 				unban(bot.botAPI, update)
 				break
