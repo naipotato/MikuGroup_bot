@@ -1,6 +1,10 @@
 package main
 
-import tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
+import (
+	"log"
+
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
+)
 
 func about(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	acerca := `<b>Hatsune Miku</b> @PonyRevolution_bot
@@ -49,4 +53,58 @@ func love(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		bot.Send(msg)
 		bot.Send(tgbotapi.NewStickerShare(update.Message.Chat.ID, "CAADAQADwQEAAuWyyh3shINoW9G1fwI"))
 	}
+}
+
+func pin(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
+	if update.Message.ReplyToMessage != nil {
+		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Emm... Qué mensaje debo anclar? (・・ ) ?")
+		msg.ReplyToMessageID = update.Message.MessageID
+		bot.Send(msg)
+		return
+	}
+
+	chatMember, err := bot.GetChatMember(tgbotapi.ChatConfigWithUser{
+		ChatID: update.Message.Chat.ID,
+		UserID: update.Message.From.ID,
+	})
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	if !chatMember.CanPinMessages && chatMember.Status != "creator" {
+		sticker := tgbotapi.NewStickerShare(update.Message.Chat.ID, "CAADAgADoRsAAuCjggfsFEp1hLA7RQI")
+		sticker.ReplyToMessageID = update.Message.MessageID
+		bot.Send(sticker)
+		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
+		bot.Send(tgbotapi.NewMessage(update.Message.Chat.ID, "Tú no puedes anclar mensajes"))
+		return
+	}
+
+	chatMember, err = bot.GetChatMember(tgbotapi.ChatConfigWithUser{
+		ChatID: update.Message.Chat.ID,
+		UserID: bot.Self.ID,
+	})
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	if !chatMember.CanPinMessages {
+		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "No tengo permisos para anclar mensajes (T_T)")
+		msg.ReplyToMessageID = update.Message.MessageID
+		bot.Send(msg)
+		return
+	}
+
+	bot.PinChatMessage(tgbotapi.PinChatMessageConfig{
+		ChatID:    update.Message.Chat.ID,
+		MessageID: update.Message.ReplyToMessage.MessageID,
+	})
+
+	bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
+	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Anclado <(￣︶￣)>")
+	msg.ReplyToMessageID = update.Message.ReplyToMessage.MessageID
 }
