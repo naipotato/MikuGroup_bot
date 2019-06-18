@@ -90,6 +90,9 @@ func (bot *bot) listenToCommands() {
 			case "about":
 				about(bot.botAPI, update)
 				break
+			case "di":
+				di(bot.botAPI, update)
+				break
 			}
 		}
 	}
