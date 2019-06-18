@@ -92,6 +92,12 @@ func (bot *bot) listenToCommands() {
 					break
 				}
 			}
+
+			filterGroup(bot.botAPI, update)
+
+			if update.Message.NewChatMembers != nil {
+				newChatMembers(bot.botAPI, update)
+			}
 		}
 	}
 }
