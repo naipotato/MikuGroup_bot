@@ -55,44 +55,42 @@ func (bot *bot) listenToCommands() {
 		}
 
 		if update.Message.Chat.Type == "supergroup" {
-			if !update.Message.IsCommand() {
-				continue
-			}
-
-			switch update.Message.Command() {
-			case "ban":
-				ban(bot.botAPI, update)
-				break
-			case "del":
-				delete(bot.botAPI, update)
-				break
-			case "kick":
-				kick(bot.botAPI, update)
-				break
-			case "kickme":
-				kickMe(bot.botAPI, update)
-				break
-			case "pin":
-				pin(bot.botAPI, update)
-				break
-			case "pinmute":
-				pinMute(bot.botAPI, update)
-				break
-			case "unban":
-				unban(bot.botAPI, update)
-				break
-			case "love":
-				love(bot.botAPI, update)
-				break
-			case "help":
-				helpMessage(bot.botAPI, update)
-				break
-			case "about":
-				about(bot.botAPI, update)
-				break
-			case "di":
-				di(bot.botAPI, update)
-				break
+			if update.Message.IsCommand() {
+				switch update.Message.Command() {
+				case "ban":
+					ban(bot.botAPI, update)
+					break
+				case "del":
+					delete(bot.botAPI, update)
+					break
+				case "kick":
+					kick(bot.botAPI, update)
+					break
+				case "kickme":
+					kickMe(bot.botAPI, update)
+					break
+				case "pin":
+					pin(bot.botAPI, update)
+					break
+				case "pinmute":
+					pinMute(bot.botAPI, update)
+					break
+				case "unban":
+					unban(bot.botAPI, update)
+					break
+				case "love":
+					love(bot.botAPI, update)
+					break
+				case "help":
+					helpMessage(bot.botAPI, update)
+					break
+				case "about":
+					about(bot.botAPI, update)
+					break
+				case "di":
+					di(bot.botAPI, update)
+					break
+				}
 			}
 		}
 	}
