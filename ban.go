@@ -286,3 +286,67 @@ func kickMe(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	bot.Send(msg)
 	bot.Send(tgbotapi.NewStickerShare(update.Message.Chat.ID, "CAADAgADmhsAAuCjggeKLIclx5HvGQI"))
 }
+
+func unban(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
+	if update.Message.ReplyToMessage != nil {
+		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Uhm? No puedo banear a nadie si no respondes a un mensaje")
+		msg.ReplyToMessageID = update.Message.MessageID
+		bot.Send(msg)
+		return
+	}
+
+	chatMember, err := bot.GetChatMember(tgbotapi.ChatConfigWithUser{
+		ChatID: update.Message.Chat.ID,
+		UserID: update.Message.From.ID,
+	})
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	if !chatMember.CanRestrictMembers && chatMember.Status != "creator" {
+		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID,
+			"Lo siento, pero me dijeron que tú no puedes desbanear usuarios...")
+		msg.ReplyToMessageID = update.Message.MessageID
+		bot.Send(msg)
+		return
+	}
+
+	chatMember, err = bot.GetChatMember(tgbotapi.ChatConfigWithUser{
+		ChatID: update.Message.Chat.ID,
+		UserID: bot.Self.ID,
+	})
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	if !chatMember.CanRestrictMembers {
+		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID,
+			"Etto... no tengo los permisos para desbanear usuarios (╥_╥)")
+		msg.ReplyToMessageID = update.Message.MessageID
+		bot.Send(msg)
+		return
+	}
+
+	if update.Message.ReplyToMessage.ForwardFrom != nil {
+		bot.UnbanChatMember(tgbotapi.ChatMemberConfig{
+			ChatID: update.Message.Chat.ID,
+			UserID: update.Message.ReplyToMessage.ForwardFrom.ID,
+		})
+	} else {
+		bot.UnbanChatMember(tgbotapi.ChatMemberConfig{
+			ChatID: update.Message.Chat.ID,
+			UserID: update.Message.ReplyToMessage.From.ID,
+		})
+	}
+
+	bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
+	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "¡Desbanead@! (o^▽^o)")
+	msg.ReplyToMessageID = update.Message.ReplyToMessage.MessageID
+	bot.Send(msg)
+	bot.Send(tgbotapi.NewStickerShare(update.Message.Chat.ID, "CAADAgADshsAAuCjgge9W_YhLXZXrgI"))
+}

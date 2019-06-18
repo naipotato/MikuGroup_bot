@@ -69,6 +69,9 @@ func (bot *bot) listenToCommands() {
 			case "kickme":
 				kickMe(bot.botAPI, update)
 				break
+			case "unban":
+				unban(bot.botAPI, update)
+				break
 			}
 		}
 	}
