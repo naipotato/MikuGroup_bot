@@ -37,3 +37,16 @@ func helpMessage(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	msg.ReplyToMessageID = update.Message.MessageID
 	bot.Send(msg)
 }
+
+func love(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
+	if update.Message.From.ID == 82982166 || update.Message.From.ID == 359710858 {
+		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "La pareja más hermosa que he conocido son [Zoé]"+
+			"(tg://user?id=359710858) y [Nahuel](tg://user?id=82982166) :3\n\nEsos dos tortolitos enamorados se aman "+
+			"inconcicionalmente, se acompañan en todo lo que pueden, y anteponen siempre las necesidades del otro ❤️")
+		msg.ParseMode = "Markdown"
+		msg.ReplyToMessageID = update.Message.MessageID
+		bot.Send(msg)
+		bot.Send(tgbotapi.NewStickerShare(update.Message.Chat.ID, "CAADAQADwQEAAuWyyh3shINoW9G1fwI"))
+	}
+}
