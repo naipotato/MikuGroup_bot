@@ -2,7 +2,6 @@ package main
 
 import (
 	"log"
-	"strings"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
@@ -166,9 +165,7 @@ func pinMute(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 }
 
 func di(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
-	words := strings.Split(update.Message.Text, " ")
-
-	if len(words) == 1 {
+	if update.Message.CommandArguments() == "" {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Emm... Qué es lo que debo decir? (・・ ) ?")
 		msg.ReplyToMessageID = update.Message.MessageID
@@ -178,11 +175,7 @@ func di(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 
 	bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 
-	copy(words[0:], words[1:])
-	words[len(words)-1] = ""
-	words = words[:len(words)-1]
-
-	msg := tgbotapi.NewMessage(update.Message.Chat.ID, strings.Join(words, " "))
+	msg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.CommandArguments())
 	msg.ReplyToMessageID = update.Message.MessageID
 	bot.Send(msg)
 }
