@@ -15,7 +15,18 @@ type bot struct {
 }
 
 func botNew(token string) *bot {
+	bot := new(bot)
 
+	bot.token = token
+
+	botAPI, err := tgbotapi.NewBotAPI(token)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	bot.botAPI = botAPI
+
+	return bot
 }
 
 func (bot *bot) run(port int) {
