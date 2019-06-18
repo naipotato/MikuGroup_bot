@@ -56,7 +56,7 @@ func love(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 }
 
 func pin(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
-	if update.Message.ReplyToMessage != nil {
+	if update.Message.ReplyToMessage == nil {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Emm... Qué mensaje debo anclar? (・・ ) ?")
 		msg.ReplyToMessageID = update.Message.MessageID

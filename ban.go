@@ -288,7 +288,7 @@ func kickMe(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 }
 
 func unban(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
-	if update.Message.ReplyToMessage != nil {
+	if update.Message.ReplyToMessage == nil {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Uhm? No puedo banear a nadie si no respondes a un mensaje")
 		msg.ReplyToMessageID = update.Message.MessageID
