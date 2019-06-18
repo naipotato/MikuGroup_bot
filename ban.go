@@ -9,8 +9,7 @@ import (
 func ban(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	if update.Message.ReplyToMessage == nil {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
-		msg := tgbotapi.NewMessage(update.Message.Chat.ID,
-			"Uhm? No puedo banear a nadie si no respondes a un mensaje")
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Uhm? No puedo banear a nadie si no respondes a un mensaje")
 		msg.ReplyToMessageID = update.Message.MessageID
 		bot.Send(msg)
 		return
@@ -45,8 +44,7 @@ func ban(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 
 	if !chatMember.CanRestrictMembers {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
-		msg := tgbotapi.NewMessage(update.Message.Chat.ID,
-			"Etto... no tengo los permisos para banear usuarios (╥_╥)")
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Etto... no tengo los permisos para banear usuarios (╥_╥)")
 		msg.ReplyToMessageID = update.Message.MessageID
 		bot.Send(msg)
 		return
@@ -61,8 +59,7 @@ func ban(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 
 	if user.ID == bot.Self.ID {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
-		msg := tgbotapi.NewMessage(update.Message.Chat.ID,
-			"Hey! Esa soy yo! (O.O)")
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Hey! Esa soy yo! (O.O)")
 		msg.ReplyToMessageID = update.Message.MessageID
 		bot.Send(msg)
 		bot.Send(tgbotapi.NewStickerShare(update.Message.Chat.ID, "CAADAgADrRsAAuCjgge1g6be76IiHgI"))
@@ -90,8 +87,7 @@ func ban(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 
 	if chatMember.Status == "administrator" || chatMember.Status == "creator" {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
-		msg := tgbotapi.NewMessage(update.Message.Chat.ID,
-			"Etto... No puedo banear administradores (⌒_⌒;)")
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Etto... No puedo banear administradores (⌒_⌒;)")
 		msg.ReplyToMessageID = update.Message.MessageID
 		bot.Send(msg)
 		return
@@ -158,8 +154,7 @@ func kick(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 
 	if !chatMember.CanRestrictMembers {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
-		msg := tgbotapi.NewMessage(update.Message.Chat.ID,
-			"Etto... no tengo los permisos para expulsar usuarios (╥_╥)")
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Etto... no tengo los permisos para expulsar usuarios (╥_╥)")
 		msg.ReplyToMessageID = update.Message.MessageID
 		bot.Send(msg)
 		return
@@ -174,8 +169,7 @@ func kick(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 
 	if user.ID == bot.Self.ID {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
-		msg := tgbotapi.NewMessage(update.Message.Chat.ID,
-			"Hey! Esa soy yo! (O.O)")
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Hey! Esa soy yo! (O.O)")
 		msg.ReplyToMessageID = update.Message.MessageID
 		bot.Send(tgbotapi.NewStickerShare(update.Message.Chat.ID, "CAADAgADrRsAAuCjgge1g6be76IiHgI"))
 		return
@@ -203,8 +197,7 @@ func kick(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 
 	if chatMember.Status == "administrator" || chatMember.Status == "creator" {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
-		msg := tgbotapi.NewMessage(update.Message.Chat.ID,
-			"Etto... No puedo expulsar administradores (⌒_⌒;)")
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Etto... No puedo expulsar administradores (⌒_⌒;)")
 		msg.ReplyToMessageID = update.Message.MessageID
 		bot.Send(msg)
 		return
