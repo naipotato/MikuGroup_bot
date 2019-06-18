@@ -46,7 +46,7 @@ func botNew(token string) *bot {
 }
 
 func (bot *bot) run(port int) {
-	_, err := bot.botAPI.SetWebhook(tgbotapi.NewWebhook("https://ponyrevolution-bot.herokuapp.com/" + bot.token))
+	_, err := bot.botAPI.SetWebhook(tgbotapi.NewWebhook("https://groupadmin-bot.herokuapp.com/" + bot.token))
 	if err != nil {
 		log.Fatal(err)
 	}
