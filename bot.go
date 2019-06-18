@@ -75,6 +75,9 @@ func (bot *bot) listenToCommands() {
 			case "unban":
 				unban(bot.botAPI, update)
 				break
+			case "help":
+				helpMessage(bot.botAPI, update)
+				break
 			case "about":
 				about(bot.botAPI, update)
 				break
