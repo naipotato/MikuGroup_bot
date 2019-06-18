@@ -66,6 +66,9 @@ func (bot *bot) listenToCommands() {
 			case "kick":
 				kick(bot.botAPI, update)
 				break
+			case "kickme":
+				kickMe(bot.botAPI, update)
+				break
 			}
 		}
 	}

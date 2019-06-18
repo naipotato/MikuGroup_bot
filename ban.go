@@ -240,3 +240,56 @@ func kick(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	bot.Send(msg)
 	bot.Send(tgbotapi.NewStickerShare(update.Message.Chat.ID, "CAADAgADpxsAAuCjggf0_Fu4xLzgxAI"))
 }
+
+func kickMe(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
+	chatMember, err := bot.GetChatMember(tgbotapi.ChatConfigWithUser{
+		ChatID: update.Message.Chat.ID,
+		UserID: bot.Self.ID,
+	})
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	if !chatMember.CanRestrictMembers {
+		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Etto... no tengo los permisos para expulsar usuario (╥_╥)")
+		msg.ReplyToMessageID = update.Message.MessageID
+		bot.Send(msg)
+		return
+	}
+
+	chatMember, err = bot.GetChatMember(tgbotapi.ChatConfigWithUser{
+		ChatID: update.Message.Chat.ID,
+		UserID: update.Message.From.ID,
+	})
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	if chatMember.Status == "administrator" || chatMember.Status == "creator" {
+		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Etto... No puedo expulsar administradores (⌒_⌒;)")
+		msg.ReplyToMessageID = update.Message.MessageID
+		bot.Send(msg)
+		return
+	}
+
+	bot.KickChatMember(tgbotapi.KickChatMemberConfig{
+		ChatMemberConfig: tgbotapi.ChatMemberConfig{
+			ChatID: update.Message.Chat.ID,
+			UserID: update.Message.From.ID,
+		},
+	})
+	bot.UnbanChatMember(tgbotapi.ChatMemberConfig{
+		ChatID: update.Message.Chat.ID,
+		UserID: update.Message.From.ID,
+	})
+
+	bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
+	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "¡Espero que vuelvas pronto! ( ; ω ; )")
+	msg.ReplyToMessageID = update.Message.MessageID
+	bot.Send(msg)
+	bot.Send(tgbotapi.NewStickerShare(update.Message.Chat.ID, "CAADAgADmhsAAuCjggeKLIclx5HvGQI"))
+}
