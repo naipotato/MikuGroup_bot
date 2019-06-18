@@ -39,6 +39,7 @@ func botNew(token string) *bot {
 	if err != nil {
 		log.Fatal(err)
 	}
+	log.Println("Created new BotAPI")
 
 	bot.botAPI = botAPI
 
@@ -50,6 +51,7 @@ func (bot *bot) run(port int) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	log.Println("Webhook enabled")
 
 	info, err := bot.botAPI.GetWebhookInfo()
 	if err != nil {
@@ -68,6 +70,8 @@ func (bot *bot) run(port int) {
 
 func (bot *bot) listenToCommands() {
 	for update := range bot.updates {
+		log.Println("Update received!")
+
 		if update.Message != nil {
 			continue
 		}
