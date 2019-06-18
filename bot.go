@@ -58,6 +58,8 @@ func (bot *bot) run(port int) {
 		log.Printf("Telegram callback failed: %s", info.LastErrorMessage)
 	}
 
+	bot.botAPI.Debug = true
+
 	bot.updates = bot.botAPI.ListenForWebhook("/" + bot.token)
 	go http.ListenAndServe("0.0.0.0:"+strconv.Itoa(port), nil)
 
