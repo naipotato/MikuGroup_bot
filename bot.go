@@ -33,6 +33,6 @@ func (bot *bot) run(port int) {
 
 }
 
-func (bot *bot) configureHandlers() {
+func (bot *bot) listenToCommands() {
 
 }
