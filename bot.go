@@ -60,6 +60,9 @@ func (bot *bot) listenToCommands() {
 			}
 
 			switch update.Message.Command() {
+			case "ban":
+				ban(bot.botAPI, update)
+				break
 			}
 		}
 	}
