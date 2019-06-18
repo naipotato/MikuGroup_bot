@@ -1,1 +1,1 @@
-web: python3 animux-bot
+web: bin/groupadmin-bot
