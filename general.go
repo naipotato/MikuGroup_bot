@@ -190,9 +190,12 @@ func di(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	}
 
 	bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
-
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.CommandArguments())
-	msg.ReplyToMessageID = update.Message.MessageID
 	msg.ParseMode = "Markdown"
 	bot.Send(msg)
+
+	bot.DeleteMessage(tgbotapi.DeleteMessageConfig{
+		ChatID:    update.Message.Chat.ID,
+		MessageID: update.Message.MessageID,
+	})
 }
