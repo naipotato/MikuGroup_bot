@@ -194,7 +194,7 @@ func di(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	msg.ParseMode = "Markdown"
 
 	if update.Message.ReplyToMessage != nil {
-		msg.ReplyToMessageID = update.Message.MessageID
+		msg.ReplyToMessageID = update.Message.ReplyToMessage.MessageID
 	}
 
 	bot.Send(msg)
