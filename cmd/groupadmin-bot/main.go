@@ -17,10 +17,11 @@
 package main
 
 import (
-	"gitlab.com/nahuelwexd/groupadmin-bot/internal/app/groupadmin-bot"
 	"log"
 	"os"
 	"strconv"
+
+	groupadminbot "gitlab.com/nahuelwexd/groupadmin-bot/internal/app/groupadmin-bot"
 )
 
 func main() {
