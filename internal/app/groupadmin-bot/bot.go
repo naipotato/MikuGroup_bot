@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-package main
+package groupadminbot
 
 import (
 	"log"
@@ -24,14 +24,14 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
-type bot struct {
+type Bot struct {
 	token   string
 	botAPI  *tgbotapi.BotAPI
 	updates tgbotapi.UpdatesChannel
 }
 
-func botNew(token string) *bot {
-	bot := new(bot)
+func BotNew(token string) *Bot {
+	bot := new(Bot)
 
 	bot.token = token
 
@@ -46,7 +46,7 @@ func botNew(token string) *bot {
 	return bot
 }
 
-func (bot *bot) run(port int) {
+func (bot *Bot) Run(port int) {
 	_, err := bot.botAPI.SetWebhook(tgbotapi.NewWebhook("https://groupadmin-bot.herokuapp.com/" + bot.token))
 	if err != nil {
 		log.Fatal(err)
@@ -68,7 +68,7 @@ func (bot *bot) run(port int) {
 	bot.listenToCommands()
 }
 
-func (bot *bot) listenToCommands() {
+func (bot *Bot) listenToCommands() {
 	for update := range bot.updates {
 		log.Println("Update received!")
 

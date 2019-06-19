@@ -17,6 +17,7 @@
 package main
 
 import (
+	"gitlab.com/nahuelwexd/groupadmin-bot/internal/app/groupadmin-bot"
 	"log"
 	"os"
 	"strconv"
@@ -33,6 +34,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	bot := botNew(token)
-	bot.run(port)
+	bot := groupadminbot.BotNew(token)
+	bot.Run(port)
 }
