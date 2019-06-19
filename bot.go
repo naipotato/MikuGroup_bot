@@ -71,11 +71,12 @@ func (bot *bot) run(port int) {
 func (bot *bot) listenToCommands() {
 	for update := range bot.updates {
 		log.Println("Update received!")
-		log.Println(update)
 
 		if update.Message != nil {
 			continue
 		}
+
+		log.Println(update.Message)
 
 		if update.Message.Chat.Type == "supergroup" {
 			if update.Message.IsCommand() {
