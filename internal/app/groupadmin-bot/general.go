@@ -192,6 +192,11 @@ func di(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.CommandArguments())
 	msg.ParseMode = "Markdown"
+
+	if update.Message.ReplyToMessage != nil {
+		msg.ReplyToMessageID = update.Message.MessageID
+	}
+
 	bot.Send(msg)
 
 	chatMember, err := bot.GetChatMember(tgbotapi.ChatConfigWithUser{
@@ -204,9 +209,9 @@ func di(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	}
 
 	if chatMember.CanDeleteMessages {
-	bot.DeleteMessage(tgbotapi.DeleteMessageConfig{
-		ChatID:    update.Message.Chat.ID,
-		MessageID: update.Message.MessageID,
-	})
-}
+		bot.DeleteMessage(tgbotapi.DeleteMessageConfig{
+			ChatID:    update.Message.Chat.ID,
+			MessageID: update.Message.MessageID,
+		})
+	}
 }
