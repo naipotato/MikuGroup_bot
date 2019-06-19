@@ -80,37 +80,51 @@ func (bot *bot) listenToCommands() {
 			if update.Message.IsCommand() {
 				switch update.Message.Command() {
 				case "ban":
+					log.Println("Ban command received")
 					ban(bot.botAPI, update)
 					break
 				case "del":
+					log.Println("Del command received")
 					delete(bot.botAPI, update)
 					break
 				case "kick":
+					log.Println("Kick command received")
 					kick(bot.botAPI, update)
 					break
 				case "kickme":
+					log.Println("KickMe command received")
 					kickMe(bot.botAPI, update)
 					break
 				case "pin":
+					log.Println("Pin command received")
 					pin(bot.botAPI, update)
 					break
 				case "pinmute":
+					log.Println("PinMute command received")
 					pinMute(bot.botAPI, update)
 					break
 				case "unban":
+					log.Println("Unban command received")
 					unban(bot.botAPI, update)
 					break
 				case "love":
+					log.Println("Love command received")
 					love(bot.botAPI, update)
 					break
 				case "help":
+					log.Println("Help command received")
 					helpMessage(bot.botAPI, update)
 					break
 				case "about":
+					log.Println("About command received")
 					about(bot.botAPI, update)
 					break
 				case "di":
+					log.Println("Di command received")
 					di(bot.botAPI, update)
+					break
+				default:
+					log.Println(update.Message.Command())
 					break
 				}
 			}
