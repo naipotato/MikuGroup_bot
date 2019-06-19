@@ -123,9 +123,6 @@ func (bot *bot) listenToCommands() {
 					log.Println("Di command received")
 					di(bot.botAPI, update)
 					break
-				default:
-					log.Println(update.Message.Command())
-					break
 				}
 			}
 
