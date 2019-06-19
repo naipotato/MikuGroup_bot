@@ -193,5 +193,6 @@ func di(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.CommandArguments())
 	msg.ReplyToMessageID = update.Message.MessageID
+	msg.ParseMode = "Markdown"
 	bot.Send(msg)
 }
