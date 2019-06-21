@@ -123,6 +123,7 @@ func pin(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Anclado <(￣︶￣)>")
 	msg.ReplyToMessageID = update.Message.ReplyToMessage.MessageID
+	bot.Send(msg)
 }
 
 func pinMute(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
@@ -178,6 +179,7 @@ func pinMute(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Anclado <(￣︶￣)>")
 	msg.ReplyToMessageID = update.Message.ReplyToMessage.MessageID
+	bot.Send(msg)
 }
 
 func di(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
