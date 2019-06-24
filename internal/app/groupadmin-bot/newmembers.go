@@ -34,7 +34,7 @@ func addedToGroup(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 
 	if update.Message.Chat.ID != int64(groupID) {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
-		bot.Send(tgbotapi.NewMessage(update.Message.Chat.ID, "Eh? Qué hago aquí? Esto no es @AniKick! (>_<)"))
+		bot.Send(tgbotapi.NewMessage(update.Message.Chat.ID, "Eh? Qué hago aquí? Esto no es @AnimeKick! (>_<)"))
 		bot.LeaveChat(tgbotapi.ChatConfig{
 			ChatID: update.Message.Chat.ID,
 		})
@@ -60,7 +60,7 @@ func filterGroup(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 
 	if update.Message.Chat.ID != int64(groupID) {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
-		bot.Send(tgbotapi.NewMessage(update.Message.Chat.ID, "Eh? Qué hago aquí? Esto no es @AniKick! (>_<)"))
+		bot.Send(tgbotapi.NewMessage(update.Message.Chat.ID, "Eh? Qué hago aquí? Esto no es @AnimeKick! (>_<)"))
 		bot.LeaveChat(tgbotapi.ChatConfig{
 			ChatID: update.Message.Chat.ID,
 		})
