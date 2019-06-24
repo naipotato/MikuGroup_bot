@@ -217,3 +217,10 @@ func di(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		})
 	}
 }
+
+func anuncio(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
+	if update.Message.From.ID == 82982166 || update.Message.From.ID == 359710858 {
+		di(bot, update)
+		pin(bot, update)
+	}
+}

@@ -123,6 +123,9 @@ func (bot *Bot) listenToCommands() {
 					log.Println("Di command received")
 					di(bot.botAPI, update)
 					break
+				case "anuncio":
+					log.Println("Anuncio command received")
+					anuncio(bot.botAPI, update)
 				}
 			}
 
