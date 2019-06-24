@@ -97,7 +97,7 @@ func (bot *Bot) listenToCommands() {
 					break
 				case "pin":
 					log.Println("Pin command received")
-					pin(bot.botAPI, update)
+					pin(bot.botAPI, update, true)
 					break
 				case "pinmute":
 					log.Println("PinMute command received")

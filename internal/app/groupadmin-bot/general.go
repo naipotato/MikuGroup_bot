@@ -71,7 +71,7 @@ func love(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	}
 }
 
-func pin(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
+func pin(bot *tgbotapi.BotAPI, update tgbotapi.Update, confirmation bool) {
 	if update.Message.ReplyToMessage == nil {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Emm... Qué mensaje debo anclar? (・・ ) ?")
@@ -121,9 +121,12 @@ func pin(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	})
 
 	bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
-	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Anclado <(￣︶￣)>")
-	msg.ReplyToMessageID = update.Message.ReplyToMessage.MessageID
-	bot.Send(msg)
+
+	if confirmation {
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Anclado <(￣︶￣)>")
+		msg.ReplyToMessageID = update.Message.ReplyToMessage.MessageID
+		bot.Send(msg)
+	}
 }
 
 func pinMute(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
@@ -221,6 +224,6 @@ func di(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 func anuncio(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	if update.Message.From.ID == 82982166 || update.Message.From.ID == 359710858 {
 		di(bot, update)
-		pin(bot, update)
+		pin(bot, update, false)
 	}
 }
