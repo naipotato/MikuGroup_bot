@@ -131,6 +131,10 @@ func (bot *Bot) listenToCommands() {
 			if update.Message.NewChatMembers != nil {
 				newChatMembers(bot.botAPI, update)
 			}
+		} else if update.Message.Chat.Type != "private" {
+			bot.botAPI.LeaveChat(tgbotapi.ChatConfig{
+				ChatID: update.Message.Chat.ID,
+			})
 		}
 	}
 }
