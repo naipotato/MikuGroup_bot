@@ -18,7 +18,6 @@ package groupadminbot
 
 import (
 	"log"
-
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
@@ -30,7 +29,6 @@ func ban(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		bot.Send(msg)
 		return
 	}
-
 	chatMember, err := bot.GetChatMember(tgbotapi.ChatConfigWithUser{
 		ChatID: update.Message.Chat.ID,
 		UserID: update.Message.From.ID,
@@ -39,7 +37,6 @@ func ban(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		log.Println(err)
 		return
 	}
-
 	if !chatMember.CanRestrictMembers && chatMember.Status != "creator" {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID,
@@ -57,7 +54,6 @@ func ban(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		log.Println(err)
 		return
 	}
-
 	if !chatMember.CanRestrictMembers {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Etto... no tengo los permisos para banear usuarios (╥_╥)")
@@ -65,22 +61,19 @@ func ban(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		bot.Send(msg)
 		return
 	}
-
 	var user *tgbotapi.User
 	if update.Message.ReplyToMessage.ForwardFrom != nil {
 		user = update.Message.ReplyToMessage.ForwardFrom
 	} else {
 		user = update.Message.ReplyToMessage.From
 	}
-
 	if user.ID == bot.Self.ID {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Hey! Esa soy yo! (O.O)")
 		msg.ReplyToMessageID = update.Message.MessageID
-		bot.Send(msg)
 		bot.Send(tgbotapi.NewStickerShare(update.Message.Chat.ID, "CAADAgADrRsAAuCjgge1g6be76IiHgI"))
+		bot.Send(msg)
 	}
-
 	if update.Message.ReplyToMessage.ForwardFrom != nil {
 		chatMember, err = bot.GetChatMember(tgbotapi.ChatConfigWithUser{
 			ChatID: update.Message.Chat.ID,
@@ -100,7 +93,6 @@ func ban(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 			return
 		}
 	}
-
 	if chatMember.Status == "administrator" || chatMember.Status == "creator" {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Etto... No puedo banear administradores (⌒_⌒;)")
@@ -108,7 +100,6 @@ func ban(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		bot.Send(msg)
 		return
 	}
-
 	if update.Message.ReplyToMessage.ForwardFrom != nil {
 		bot.KickChatMember(tgbotapi.KickChatMemberConfig{
 			ChatMemberConfig: tgbotapi.ChatMemberConfig{
@@ -124,7 +115,6 @@ func ban(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 			},
 		})
 	}
-
 	bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "¡Banead@!")
 	msg.ReplyToMessageID = update.Message.MessageID
@@ -141,7 +131,6 @@ func kick(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		bot.Send(msg)
 		return
 	}
-
 	chatMember, err := bot.GetChatMember(tgbotapi.ChatConfigWithUser{
 		ChatID: update.Message.Chat.ID,
 		UserID: update.Message.From.ID,
@@ -150,7 +139,6 @@ func kick(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		log.Println(err)
 		return
 	}
-
 	if !chatMember.CanRestrictMembers && chatMember.Status != "creator" {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID,
@@ -159,7 +147,6 @@ func kick(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		bot.Send(msg)
 		return
 	}
-
 	chatMember, err = bot.GetChatMember(tgbotapi.ChatConfigWithUser{
 		ChatID: update.Message.Chat.ID,
 		UserID: bot.Self.ID,
@@ -176,22 +163,20 @@ func kick(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		bot.Send(msg)
 		return
 	}
-
 	var user *tgbotapi.User
 	if update.Message.ReplyToMessage.ForwardFrom != nil {
 		user = update.Message.ReplyToMessage.ForwardFrom
 	} else {
 		user = update.Message.ReplyToMessage.From
 	}
-
 	if user.ID == bot.Self.ID {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Hey! Esa soy yo! (O.O)")
 		msg.ReplyToMessageID = update.Message.MessageID
 		bot.Send(tgbotapi.NewStickerShare(update.Message.Chat.ID, "CAADAgADrRsAAuCjgge1g6be76IiHgI"))
+		bot.Send(msg)
 		return
 	}
-
 	if update.Message.ReplyToMessage.ForwardFrom != nil {
 		chatMember, err = bot.GetChatMember(tgbotapi.ChatConfigWithUser{
 			ChatID: update.Message.Chat.ID,
@@ -211,7 +196,6 @@ func kick(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 			return
 		}
 	}
-
 	if chatMember.Status == "administrator" || chatMember.Status == "creator" {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Etto... No puedo expulsar administradores (⌒_⌒;)")
@@ -219,7 +203,6 @@ func kick(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		bot.Send(msg)
 		return
 	}
-
 	if update.Message.ReplyToMessage.ForwardFrom != nil {
 		bot.KickChatMember(tgbotapi.KickChatMemberConfig{
 			ChatMemberConfig: tgbotapi.ChatMemberConfig{
@@ -250,7 +233,6 @@ func kick(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	bot.Send(msg)
 	bot.Send(tgbotapi.NewStickerShare(update.Message.Chat.ID, "CAADAgADpxsAAuCjggf0_Fu4xLzgxAI"))
 }
-
 func kickMe(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	chatMember, err := bot.GetChatMember(tgbotapi.ChatConfigWithUser{
 		ChatID: update.Message.Chat.ID,
@@ -268,7 +250,6 @@ func kickMe(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		bot.Send(msg)
 		return
 	}
-
 	chatMember, err = bot.GetChatMember(tgbotapi.ChatConfigWithUser{
 		ChatID: update.Message.Chat.ID,
 		UserID: update.Message.From.ID,
@@ -277,7 +258,6 @@ func kickMe(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		log.Println(err)
 		return
 	}
-
 	if chatMember.Status == "administrator" || chatMember.Status == "creator" {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Etto... No puedo expulsar administradores (⌒_⌒;)")
@@ -285,7 +265,6 @@ func kickMe(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		bot.Send(msg)
 		return
 	}
-
 	bot.KickChatMember(tgbotapi.KickChatMemberConfig{
 		ChatMemberConfig: tgbotapi.ChatMemberConfig{
 			ChatID: update.Message.Chat.ID,
@@ -296,14 +275,12 @@ func kickMe(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		ChatID: update.Message.Chat.ID,
 		UserID: update.Message.From.ID,
 	})
-
 	bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "¡Espero que vuelvas pronto! ( ; ω ; )")
 	msg.ReplyToMessageID = update.Message.MessageID
 	bot.Send(msg)
 	bot.Send(tgbotapi.NewStickerShare(update.Message.Chat.ID, "CAADAgADmhsAAuCjggeKLIclx5HvGQI"))
 }
-
 func unban(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	if update.Message.ReplyToMessage == nil {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
@@ -312,7 +289,6 @@ func unban(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		bot.Send(msg)
 		return
 	}
-
 	chatMember, err := bot.GetChatMember(tgbotapi.ChatConfigWithUser{
 		ChatID: update.Message.Chat.ID,
 		UserID: update.Message.From.ID,
@@ -321,7 +297,6 @@ func unban(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		log.Println(err)
 		return
 	}
-
 	if !chatMember.CanRestrictMembers && chatMember.Status != "creator" {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID,
@@ -330,7 +305,6 @@ func unban(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		bot.Send(msg)
 		return
 	}
-
 	chatMember, err = bot.GetChatMember(tgbotapi.ChatConfigWithUser{
 		ChatID: update.Message.Chat.ID,
 		UserID: bot.Self.ID,
@@ -339,7 +313,6 @@ func unban(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		log.Println(err)
 		return
 	}
-
 	if !chatMember.CanRestrictMembers {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID,
@@ -348,7 +321,6 @@ func unban(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		bot.Send(msg)
 		return
 	}
-
 	if update.Message.ReplyToMessage.ForwardFrom != nil {
 		bot.UnbanChatMember(tgbotapi.ChatMemberConfig{
 			ChatID: update.Message.Chat.ID,
@@ -360,7 +332,6 @@ func unban(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 			UserID: update.Message.ReplyToMessage.From.ID,
 		})
 	}
-
 	bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "¡Desbanead@! (o^▽^o)")
 	msg.ReplyToMessageID = update.Message.ReplyToMessage.MessageID

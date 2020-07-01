@@ -18,19 +18,14 @@ package groupadminbot
 
 import (
 	"log"
-
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
-
 func about(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	acerca := `<b>Hatsune Miku</b> @PonyRevolution_bot
-<i>Versión: 1.0.0</i>
-
-<i>Un excelente bot desarrollado para administrar el grupo @AnimuxOwO, además de tener muchos comandos divertidos :D</i>
-
-<b>Desarrollado por:</b> <a href="tg://user?id=82982166">ηαнυεℓ ωεx∂</a>
-<b>Código fuente:</b> https://gitlab.com/nahuelwexd/groupadmin-bot`
-
+                   <i>Versión: 1.0.0</i>
+                   <i>Un excelente bot desarrollado para administrar el grupo @AnimuxOwO, además de tener muchos comandos divertidos :D</i>
+                   <b>Desarrollado por:</b> <a href="tg://user?id=82982166">ηαнυεℓ ωεx∂</a>
+                   <b>Código fuente:</b> https://gitlab.com/nahuelwexd/groupadmin-bot`
 	bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, acerca)
 	msg.ParseMode = "HTML"
@@ -38,26 +33,22 @@ func about(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	msg.DisableWebPagePreview = true
 	bot.Send(msg)
 }
-
 func helpMessage(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	ayuda := `Estos son los comandos que puedes usar conmigo ﾞ(˘ᵕ˘)
-
-- <code>/ban</code> (por respuesta): banearé al usuario que respondiste, incluso si el mensaje fue reenviado.
-- <code>/del</code> (por respuesta): borraré el mensaje al que respondiste.
-- <code>/kick</code> (por respuesta): expulsaré al usuario, pero dejaré que pueda volver a entrar.
-- <code>/kickme</code>: te expulsaré del grupo, pero podrás volver a entrar.
-- <code>/pin</code> (por respuesta): anclaré el mensaje notificando a todos.
-- <code>/pinmute</code> (por respuesta): anclaré el mensaje silencionsamente.
-- <code>/unban</code> (por respuesta): le quitaré el ban al usuario al que respondiste, incluso si el mensaje es reenviado.
-- <code>/di</code>: repetiré lo que has dicho.`
-
+                - <code>/ban</code> (por respuesta): banearé al usuario que respondiste, incluso si el mensaje fue reenviado.
+                - <code>/del</code> (por respuesta): borraré el mensaje al que respondiste.
+                - <code>/kick</code> (por respuesta): expulsaré al usuario, pero dejaré que pueda volver a entrar.
+                - <code>/kickme</code>: te expulsaré del grupo, pero podrás volver a entrar.
+                - <code>/pin</code> (por respuesta): anclaré el mensaje notificando a todos.
+                - <code>/pinmute</code> (por respuesta): anclaré el mensaje silencionsamente.
+                - <code>/unban</code> (por respuesta): le quitaré el ban al usuario al que respondiste, incluso si el mensaje es reenviado.
+                - <code>/di</code>: repetiré lo que has dicho.`
 	bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, ayuda)
 	msg.ParseMode = "HTML"
 	msg.ReplyToMessageID = update.Message.MessageID
 	bot.Send(msg)
 }
-
 func love(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	if update.Message.From.ID == 82982166 || update.Message.From.ID == 359710858 {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
@@ -70,7 +61,6 @@ func love(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		bot.Send(tgbotapi.NewStickerShare(update.Message.Chat.ID, "CAADAQADwQEAAuWyyh3shINoW9G1fwI"))
 	}
 }
-
 func pin(bot *tgbotapi.BotAPI, update tgbotapi.Update, confirmation bool) {
 	if update.Message.ReplyToMessage == nil {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
@@ -79,7 +69,6 @@ func pin(bot *tgbotapi.BotAPI, update tgbotapi.Update, confirmation bool) {
 		bot.Send(msg)
 		return
 	}
-
 	chatMember, err := bot.GetChatMember(tgbotapi.ChatConfigWithUser{
 		ChatID: update.Message.Chat.ID,
 		UserID: update.Message.From.ID,
@@ -88,7 +77,6 @@ func pin(bot *tgbotapi.BotAPI, update tgbotapi.Update, confirmation bool) {
 		log.Println(err)
 		return
 	}
-
 	if !chatMember.CanPinMessages && chatMember.Status != "creator" {
 		sticker := tgbotapi.NewStickerShare(update.Message.Chat.ID, "CAADAgADoRsAAuCjggfsFEp1hLA7RQI")
 		sticker.ReplyToMessageID = update.Message.MessageID
@@ -97,7 +85,6 @@ func pin(bot *tgbotapi.BotAPI, update tgbotapi.Update, confirmation bool) {
 		bot.Send(tgbotapi.NewMessage(update.Message.Chat.ID, "Tú no puedes anclar mensajes"))
 		return
 	}
-
 	chatMember, err = bot.GetChatMember(tgbotapi.ChatConfigWithUser{
 		ChatID: update.Message.Chat.ID,
 		UserID: bot.Self.ID,
@@ -106,7 +93,6 @@ func pin(bot *tgbotapi.BotAPI, update tgbotapi.Update, confirmation bool) {
 		log.Println(err)
 		return
 	}
-
 	if !chatMember.CanPinMessages {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "No tengo permisos para anclar mensajes (T_T)")
@@ -114,21 +100,17 @@ func pin(bot *tgbotapi.BotAPI, update tgbotapi.Update, confirmation bool) {
 		bot.Send(msg)
 		return
 	}
-
 	bot.PinChatMessage(tgbotapi.PinChatMessageConfig{
 		ChatID:    update.Message.Chat.ID,
 		MessageID: update.Message.ReplyToMessage.MessageID,
 	})
-
 	bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
-
 	if confirmation {
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Anclado <(￣︶￣)>")
 		msg.ReplyToMessageID = update.Message.ReplyToMessage.MessageID
 		bot.Send(msg)
 	}
 }
-
 func pinMute(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	if update.Message.ReplyToMessage == nil {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
@@ -137,7 +119,6 @@ func pinMute(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		bot.Send(msg)
 		return
 	}
-
 	chatMember, err := bot.GetChatMember(tgbotapi.ChatConfigWithUser{
 		ChatID: update.Message.Chat.ID,
 		UserID: update.Message.From.ID,
@@ -146,7 +127,6 @@ func pinMute(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		log.Println(err)
 		return
 	}
-
 	if !chatMember.CanPinMessages && chatMember.Status != "creator" {
 		sticker := tgbotapi.NewStickerShare(update.Message.Chat.ID, "CAADAgADoRsAAuCjggfsFEp1hLA7RQI")
 		sticker.ReplyToMessageID = update.Message.MessageID
@@ -155,7 +135,6 @@ func pinMute(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		bot.Send(tgbotapi.NewMessage(update.Message.Chat.ID, "Tú no puedes anclar mensajes"))
 		return
 	}
-
 	chatMember, err = bot.GetChatMember(tgbotapi.ChatConfigWithUser{
 		ChatID: update.Message.Chat.ID,
 		UserID: bot.Self.ID,
@@ -164,7 +143,6 @@ func pinMute(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		log.Println(err)
 		return
 	}
-
 	if !chatMember.CanPinMessages {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "No tengo permisos para anclar mensajes (T_T)")
@@ -172,19 +150,16 @@ func pinMute(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		bot.Send(msg)
 		return
 	}
-
 	bot.PinChatMessage(tgbotapi.PinChatMessageConfig{
 		ChatID:              update.Message.Chat.ID,
 		MessageID:           update.Message.ReplyToMessage.MessageID,
 		DisableNotification: true,
 	})
-
 	bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Anclado <(￣︶￣)>")
 	msg.ReplyToMessageID = update.Message.ReplyToMessage.MessageID
 	bot.Send(msg)
 }
-
 func di(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	if update.Message.CommandArguments() == "" {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
@@ -193,17 +168,13 @@ func di(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		bot.Send(msg)
 		return
 	}
-
 	bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.CommandArguments())
 	msg.ParseMode = "Markdown"
-
 	if update.Message.ReplyToMessage != nil {
 		msg.ReplyToMessageID = update.Message.ReplyToMessage.MessageID
 	}
-
 	bot.Send(msg)
-
 	chatMember, err := bot.GetChatMember(tgbotapi.ChatConfigWithUser{
 		ChatID: update.Message.Chat.ID,
 		UserID: bot.Self.ID,
@@ -212,7 +183,6 @@ func di(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		log.Println(err)
 		return
 	}
-
 	if chatMember.CanDeleteMessages {
 		bot.DeleteMessage(tgbotapi.DeleteMessageConfig{
 			ChatID:    update.Message.Chat.ID,
@@ -220,7 +190,6 @@ func di(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		})
 	}
 }
-
 func anuncio(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	if update.Message.From.ID == 82982166 || update.Message.From.ID == 359710858 {
 		di(bot, update)

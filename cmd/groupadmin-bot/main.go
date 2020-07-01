@@ -23,7 +23,6 @@ import (
 
 	groupadminbot "gitlab.com/nahuelwexd/groupadmin-bot/internal/app/groupadmin-bot"
 )
-
 func main() {
 	token := os.Getenv("TELEGRAM_TOKEN")
 	if token == "" {

@@ -18,10 +18,8 @@ package groupadminbot
 
 import (
 	"log"
-
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
-
 func delete(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	if update.Message.ReplyToMessage == nil {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
@@ -30,7 +28,6 @@ func delete(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		bot.Send(msg)
 		return
 	}
-
 	chatMember, err := bot.GetChatMember(tgbotapi.ChatConfigWithUser{
 		ChatID: update.Message.Chat.ID,
 		UserID: update.Message.From.ID,
@@ -39,7 +36,6 @@ func delete(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		log.Println(err)
 		return
 	}
-
 	if !chatMember.CanDeleteMessages && chatMember.Status != "creator" {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Lo siento, pero no estás autorizad@ para borrar mensajes.")
@@ -47,7 +43,6 @@ func delete(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		bot.Send(msg)
 		return
 	}
-
 	chatMember, err = bot.GetChatMember(tgbotapi.ChatConfigWithUser{
 		ChatID: update.Message.Chat.ID,
 		UserID: bot.Self.ID,
@@ -56,7 +51,6 @@ func delete(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		log.Println(err)
 		return
 	}
-
 	if !chatMember.CanDeleteMessages {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Etto... no tengo los permisos para borrar mensajes (╥_╥)")
@@ -64,7 +58,6 @@ func delete(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 		bot.Send(msg)
 		return
 	}
-
 	bot.DeleteMessage(tgbotapi.DeleteMessageConfig{
 		ChatID:    update.Message.Chat.ID,
 		MessageID: update.Message.ReplyToMessage.MessageID,
