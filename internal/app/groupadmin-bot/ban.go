@@ -25,7 +25,7 @@ import (
 func ban(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	if update.Message.ReplyToMessage == nil {
 		bot.Send(tgbotapi.NewChatAction(update.Message.Chat.ID, tgbotapi.ChatTyping))
-		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Uhm? No puedo banear a nadie si no respondes a un mensaje")
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID,"Uhm? No puedo banear a nadie si no respondes a un mensaje")
 		msg.ReplyToMessageID = update.Message.MessageID
 		bot.Send(msg)
 		return
@@ -129,6 +129,7 @@ func ban(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "¡Banead@!")
 	msg.ReplyToMessageID = update.Message.MessageID
 	bot.Send(tgbotapi.NewStickerShare(update.Message.Chat.ID, "CAADAgADpxsAAuCjggf0_Fu4xLzgxAI"))
+	bot.Send(msg)
 }
 
 func kick(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
