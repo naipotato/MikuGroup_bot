@@ -1,4 +1,5 @@
-import Telegraf, { Composer } from 'telegraf';
+import { Composer } from 'telegraf';
+const Telegraf = require('telegraf');
 
 const General = new Composer();
 
@@ -34,7 +35,7 @@ General.help(async ctx => {
 	await ctx.reply(ayuda, { parse_mode: 'HTML', reply_to_message_id: ctx.message!.message_id });
 });
 
-General.command('love', Telegraf.acl([82982166, 359710858], async ctx => {
+General.command('love', Telegraf.acl([82982166, 359710858], async (ctx: any) => {
 	await ctx.replyWithChatAction('typing');
 	await ctx.reply('La pareja más hermosa que he conocido son [Zoé](tg://user?id=359710858) y [Nahuel](tg://user?id=82982166) ' +
 		':3\n\nEsos dos tortolitos enamorados se aman incondicionalmente, se acompañan en todo lo que pueden, y anteponen ' +
