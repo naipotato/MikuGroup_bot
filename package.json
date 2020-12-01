@@ -1,5 +1,5 @@
 {
-  "name": "miku-group-bot",
+  "name": "mikugroup-bot",
   "private": true,
   "main": "build/bot.js",
   "scripts": {
