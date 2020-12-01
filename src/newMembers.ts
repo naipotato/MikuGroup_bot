@@ -9,8 +9,9 @@ async function addedToGroup(ctx: Context): Promise<void> {
 	await ctx.reply('Kon\'nichiwa, Hatsune Miku desu! ＼(≧▽≦)／');
 	await ctx.replyWithSticker('CAADAgADsBsAAuCjggdzuy-p9Uzd2gI');
 	await ctx.replyWithChatAction('typing');
-	await ctx.reply('Estoy aquí para ayudar a los novios [Nahuel](tg://user?id=82982166) y [Zoé](tg://user?id=359710858) ' +
-		'a administrar este increíble grupo, así que es un placer conocerlos (◕‿◕)', { parse_mode: 'MarkdownV2' });
+	await ctx.reply('Estoy aquí para ayudar a los novios <a href="tg://user?id=82982166">Nahuel</a> y ' +
+		'<a href="tg://user?id=359710858">Zoé</a> a administrar este increíble grupo, así que es un placer conocerlos ' +
+		'(◕‿◕)', { parse_mode: 'HTML' });
 }
 
 // Filtramos que el grupo sea realmente nuestro grupo :)
@@ -36,9 +37,9 @@ NewMembers.use(async (ctx, next) => {
 		return;
 	}
 
-	if (ctx.message!.new_chat_members.includes(ctx.botInfo ?? await ctx.tg.getMe())) {
+	if (ctx.message!.new_chat_members.find(async value => value.id == ctx.botInfo?.id ?? (await ctx.tg.getMe()).id)) {
 		// En caso de que el bot mismo haya sido añadido, dar mensaje de saludo al grupo
-		addedToGroup(ctx);
+		await addedToGroup(ctx);
 		return;
 	}
 
