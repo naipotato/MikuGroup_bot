@@ -30,4 +30,5 @@ bot.use(DeleteMessages);
 bot.use(Ban);
 bot.use(General);
 
+bot.telegram.setWebhook('');
 bot.launch();
