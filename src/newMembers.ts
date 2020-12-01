@@ -37,8 +37,12 @@ NewMembers.use(async (ctx, next) => {
 		return;
 	}
 
-	if (ctx.message!.new_chat_members.find(async value => value.id == ctx.botInfo?.id ?? (await ctx.tg.getMe()).id)) {
-		// En caso de que el bot mismo haya sido añadido, dar mensaje de saludo al grupo
+	let bot = ctx.botInfo ?? await ctx.tg.getMe();
+	let botGotAdded = ctx.message!.new_chat_members.find(value => {
+		return value.id == bot.id;
+	});
+
+	if (botGotAdded != undefined) {
 		await addedToGroup(ctx);
 		return;
 	}
@@ -61,9 +65,12 @@ NewMembers.use(async (ctx, next) => {
 
 	// Y guardamos todo esto para borrarlo pasados 60 segundos
 	setTimeout(async () => {
-		await ctx.deleteMessage(ctx.message!.message_id);
-		await ctx.deleteMessage(msg.message_id);
-		await ctx.deleteMessage(sticker.message_id);
+		let chatMember = await ctx.getChatMember(bot.id);
+		if (chatMember.can_delete_messages) {
+			await ctx.deleteMessage(ctx.message!.message_id);
+			await ctx.deleteMessage(msg.message_id);
+			await ctx.deleteMessage(sticker.message_id);
+		}
 	}, 60 /* segundos */ * 1000 /* milisegundos en un segundo */);
 })
 
