@@ -1,0 +1,25 @@
+{
+	"include": [
+		"src/**/*",              // Solo se compilarán los archivos dentro de /src
+	],
+	"compilerOptions": {
+		"allowJs": true,         // Admitirá archivos JS
+		"checkJs": true,         // Realizará chequeado de tipos dentro de los archivos JS (el poco que se pueda hacer)
+		"alwaysStrict": true,    // Emitirá archivos JS con 'use strict'
+		"module": "CommonJS",    // Los módulos serán emitidos siguiendo CommonJS, para compatibilidad con Node
+		"target": "ES2020",      // El JS generado usará características de ES2020, ya que Node.js 14 las soporta
+		"outDir": "build",       // El directorio donde los archivos generados aparecerán será build
+		"esModuleInterop": true, // Soluciona algunos problemas con algunas importaciones de módulos
+		"sourceMap": true,       // Genera los mapas necesarios para depurar código TS como si fuera código JS
+		"noImplicitAny": true,  // Evita que se puedan crear miembros de tipo any de forma implícita
+		"noFallthroughCasesInSwitch": true,
+		"forceConsistentCasingInFileNames": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"pretty": true,
+		"strictBindCallApply": true,
+		"strictFunctionTypes": true,
+		"strictNullChecks": true,
+		"strictPropertyInitialization": true,
+	}
+}
