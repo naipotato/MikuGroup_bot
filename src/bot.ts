@@ -1,4 +1,4 @@
-import Telegraf from 'telegraf';
+import Telegraf, { Context } from 'telegraf';
 import Ban from './ban';
 import { TOKEN } from './constants';
 import DeleteMessages from './deleteMessages';
@@ -29,6 +29,10 @@ bot.use(NewMembers);
 bot.use(DeleteMessages);
 bot.use(Ban);
 bot.use(General);
+
+bot.catch((err: any, ctx: Context) => {
+	console.error(`Ooops, encountered an error for ${ctx.updateType}`, err);
+})
 
 bot.telegram.setWebhook('');
 bot.launch();
